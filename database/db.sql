@@ -27,7 +27,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `validate` varchar(5) DEFAULT NULL,
   `tokenPass` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- Volcando datos para la tabla imagenes.usuarios: ~15 rows (aproximadamente)
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
@@ -45,8 +45,10 @@ INSERT IGNORE INTO `usuarios` (`id_usuario`, `nombre_usuario`, `apellido_usuario
 	(15, 'YILBER ', 'GUEVARA', 'queiddonanissu-8994@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'true', NULL),
 	(16, 'YILBER ', 'GUEVARA', 'bazarabreuddei-1504@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'true', NULL),
 	(17, 'YILBER ', 'GUEVARA', 'juttetticoippa-9410@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'true', NULL),
-	(18, 'YILBER ', 'GUEVARA', 'freimeiwoxinnei-3676@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'si', NULL),
-	(19, 'YILBER ', 'GUEVARA', 'grotausseheico-2663@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'si', NULL);
+	(18, 'YILBER ', 'GUEVARA', 'freimeiwoxinnei-3676@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'si', 'lZFdFR1jYy'),
+	(19, 'YILBER ', 'GUEVARA', 'grotausseheico-2663@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'si', NULL),
+	(20, 'YILBER ', 'GUEVARA', 'jabugucabroi-8449@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'si', NULL),
+	(21, 'YILBER ', 'GUEVARA', 'biseicrocrifreu-2881@yopmail.com', '4dc7900b78a255de33390ce6681d1a14f782e440eec938cd0a25acfa1428a5930a5e7b63bf4dde2f1c69c911d6c0bb545a60b5f869434ce55db20520d530435c', 'si', '');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
