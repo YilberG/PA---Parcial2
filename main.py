@@ -83,14 +83,14 @@ def recuperarPassPost():
 def formularioPassRec(url):
     usuario = consult_users.traerUrlUsuario(url)
     if not usuario:
-        return "USUARIO NO EXISTE: "+url
+        return render_template('/fallos/urlnotexits.html')
     else:
         return render_template('/usuarios/formularioPass.html',url=url)
 @app.post('/recuperarPass/<url>')
 def formularioPassRecPost(url):
     usuario = consult_users.traerUrlUsuario(url)
     if not usuario:
-        return "USUARIO NO EXISTE: "+url
+        return render_template('/fallos/urlnotexits.html')
     else:
         contraseña = request.form.get('password')
         if not contraseña_controlador.validacionPassControlador(contraseña):
