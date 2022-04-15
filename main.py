@@ -25,7 +25,7 @@ app.secret_key = 'XDXDXDXDXDX'
 def index():
     return render_template("index.html")
 
-#LOGIN
+#LOGIN------------------------------------------------------
 @app.get("/login")
 def login():
     return render_template("usuarios/login.html")
@@ -37,6 +37,8 @@ def loginPost():
     if not login_controlador.login_controlador(user, contraseña):
         return render_template("usuarios/login.html", user = user)
     return redirect(url_for('index'))
+
+#REGISTRO DEL USUARIO-------------------------------------------
 
 @app.get("/register")
 def register():
@@ -56,6 +58,8 @@ def registerPost():
     registro_controlador.DBregistro_controlador(name,last_name,user,contraseña)
     return redirect(url_for('index')) 
 
+#VALIDAR CUENTA USUARIO---------------------------------------------------------
+
 @app.get("/validar-cuenta/<token>")
 def validar_cuenta(token):
     validar = consult_users.ObtenerUsuarioValidar(token = token)
@@ -65,7 +69,7 @@ def validar_cuenta(token):
     else:
         register_user.UsuarioValidado(token = token)
         return render_template("usuarios/validado.html")
-#RESTABLECER LA CONTRASEÑA
+#RESTABLECER LA CONTRASEÑA------------------------------------------------------------
 @app.get('/recuperarPass')
 def recuperarPass():
     return render_template("/usuarios/recuperarPass.html")
@@ -97,5 +101,26 @@ def formularioPassRecPost(url):
             return render_template('/usuarios/formularioPass.html',url=url)
         contraseña_controlador.enviarBDNewPassword(url,contraseña)
         return render_template('index.html')
-    
+#PERFIL DEL USUARIO-----------------------------------------------------------
+@app.get('/perfil')
+def perfilUsuario():
+    return render_template('/usuarios/perfil.html')
+
+#SUBIR PRODUCTOS------------------------------------------------
+@app.get('/subirProducto')
+def subirprod():
+    return render_template('/usuarios/subirProducto.html')
+
+#@app.post('subirProducto')
+#def subirprodPost(subirProducto):
+#    return subirProducto
+
+#ACTUALIZAR PRODUCTOS-------------------------------------------------------
+@app.get('/actualizarProducto')
+def actualizarProducto():
+    return render_template('/usuarios/actualizarProducto.html')
+
+#@app.post('actualizarProducto')
+#def actualizarProductoPost(actualizarProducto):
+#    return actualizarProducto
 app.run(debug=True)
