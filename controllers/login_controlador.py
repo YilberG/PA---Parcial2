@@ -1,4 +1,3 @@
-from multiprocessing.spawn import import_main_path
 from flask import flash,session
 from models import consult_users
 import hashlib

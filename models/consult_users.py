@@ -31,3 +31,11 @@ def traerUrlUsuario(url):
     usuario = cursor.fetchall()
     cursor.close()
     return usuario
+
+def traer_un_usuario(id_usuario):
+    cursor = db.cursor(dictionary=True)
+    cursor.execute('SELECT * FROM usuarios WHERE id_usuario ="'+id_usuario+'" ')
+
+    usuario = cursor.fetchone()
+    cursor.close()
+    return usuario

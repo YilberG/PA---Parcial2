@@ -1,4 +1,3 @@
-from telnetlib import ENCRYPT
 from flask import flash
 import hashlib
 from models import register_user

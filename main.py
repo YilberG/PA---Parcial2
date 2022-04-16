@@ -20,16 +20,18 @@ from controllers import registro_controlador
 from controllers import recuperarPass_controlador
 from controllers import contraseña_controlador
 from controllers import archivo_controlador
+from models import consult_archivos
 
 app = Flask(__name__)
 app.secret_key = 'XDXDXDXDXDX'
-
+#INDEX-------------------------------------------------------
 @app.get("/")
 def index():
     validarLogin = True
     if not login_controlador.estaIniciado():
         validarLogin = False
-    return render_template("index.html",validarLogin=validarLogin)
+    archivos = consult_archivos.traerArchivos()
+    return render_template("index.html",validarLogin=validarLogin, archivos = archivos)
 
 #LOGIN------------------------------------------------------
 @app.get("/login")
@@ -86,16 +88,22 @@ def validar_cuenta(token):
 #RESTABLECER LA CONTRASEÑA------------------------------------------------------------
 @app.get('/recuperarPass')
 def recuperarPass():
-    return render_template("/formularios/recuperarPass.html")
+    validarLogin = True
+    if not login_controlador.estaIniciado():
+        validarLogin = False
+    return render_template("/formularios/recuperarPass.html",validarLogin=validarLogin)
 
 @app.post('/recuperarPass')
 def recuperarPassPost():
+    validarLogin = True
+    if not login_controlador.estaIniciado():
+        validarLogin = False
     user = request.form.get('user')
     if not recuperarPass_controlador.recuperarPassControlador(user):
-        return render_template("/formularios/recuperarPass.html", user = user)
+        return render_template("/formularios/recuperarPass.html", user = user, validarLogin=validarLogin)
     
     recuperarPass_controlador.DBrecuperarPassControlador(user)
-    return render_template('index.html')
+    return render_template('index.html',validarLogin=validarLogin)
     
 @app.get('/recuperarPass/<url>')
 def formularioPassRec(url):
@@ -106,6 +114,9 @@ def formularioPassRec(url):
         return render_template('/formularios/formularioPass.html',url=url)
 @app.post('/recuperarPass/<url>')
 def formularioPassRecPost(url):
+    validarLogin = True
+    if not login_controlador.estaIniciado():
+        validarLogin = False
     usuario = consult_users.traerUrlUsuario(url)
     if not usuario:
         return render_template('/fallos/urlnotexits.html')
@@ -114,13 +125,16 @@ def formularioPassRecPost(url):
         if not contraseña_controlador.validacionPassControlador(contraseña):
             return render_template('/formularios/formularioPass.html',url=url)
         contraseña_controlador.enviarBDNewPassword(url,contraseña)
-        return render_template('index.html')
+        return render_template('index.html', validarLogin=validarLogin)
 #PERFIL DEL PERFIL-----------------------------------------------------------
 @app.get('/perfil')
 def perfilUsuario():
+    validarLogin = True
     if not login_controlador.estaIniciado():
         return redirect(url_for('login'))
-    return render_template('/usuarios/perfil.html')
+    archivos = consult_archivos.traerArchivos_usuario(str(session.get('usuario_id')))
+    usuario = consult_users.traer_un_usuario(str(session.get('usuario_id')))
+    return render_template('/usuarios/perfil.html',archivos = archivos,validarLogin=validarLogin,usuario = usuario)
 
 #SUBIR PRODUCTOS------------------------------------------------
 @app.get('/subirProducto')
@@ -142,7 +156,7 @@ def subirprodPost():
     if not archivo_controlador.validarArchivo(nombre,archivo,acceso):
         return render_template('/archivos/subirProducto.html',nombre=nombre,validarLogin=validarLogin)
     archivo_controlador.enviar_archivo_BD(str(session.get('usuario_id')),nombre,archivo,acceso)
-    return render_template('index.html',validarLogin=validarLogin)
+    return redirect(url_for('perfilUsuario'))
 
 #ACTUALIZAR PRODUCTOS-------------------------------------------------------
 @app.get('/actualizarProducto')
@@ -153,11 +167,24 @@ def actualizarProducto():
 #def actualizarProductoPost(actualizarProducto):
 #    return actualizarProducto
 
-#CERRRAR SESSION
+#CERRRAR SESSION-------------------------------------------------------------------
 
 @app.get("/cerrar_sesion")
 def cerrarSesion():
     session.clear()
     
     return redirect(url_for('login'))
+
+#VISTA PREVIA DE UN PRODUCTO------------------------------------------------------------
+@app.get("/vistaPrevia")
+def vistaPrevia():
+    validarLogin = True
+    if not login_controlador.estaIniciado():
+        validarLogin = False
+    return render_template('/archivos/vistaPrevia.html',validarLogin=validarLogin)
+
+@app.post("/vistaPrevia")
+def vistaPreviaPost():
+    
+    return vistaPrevia
 app.run(debug=True)

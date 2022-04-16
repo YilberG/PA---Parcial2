@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 
 {% block titulo %}
-    INICIO
+    VISTA PREVIA
 {% endblock %}
 
 {% block contenido %}
@@ -18,7 +18,7 @@
         </svg>
     </div>
     <div class="col-4 bg-dark text-center text-white">
-        <br><h1>INICIO</h1>
+        <br><h1><b>VISTA PREVIA</b></h1>
     </div>
     {%if validarLogin == False%}
     <div class="col-4 bg-dark text-center text-white"><br>
@@ -46,7 +46,7 @@
 <hr>
 <div class="row container-fluid">
     {% for archivo in archivos%}
-    <div class="col-6 text-white bg-secondary py-2">
+    <div class="col-12 text-white bg-secondary py-2">
         <div class="card mb-3" style="max-width: 540px;">
             <div class="row g-0">
               <div class="col-md-4">
@@ -65,12 +65,7 @@
                         </div>
                     </b>
                   </p>
-                    <a href="{{ url_for('subirprod') }}">
-                        <input type="button" value="Descargar" class="btn btn-success">
-                    </a>
-                    <a href="{{ url_for('vistaPrevia') }}">
-                        <input type="button" value="Vista" class="btn btn-warning">
-                    </a>
+                  <a href="#" class="btn btn-primary">Descargar</a>
                 </div>
               </div>
             </div>

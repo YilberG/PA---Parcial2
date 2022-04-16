@@ -25,7 +25,7 @@
         </a>
     </div>
     <div class="col-5 text-center text-white py-1 bg-dark"><br>
-        <h1>----------------------------------</h1>
+        <hr>
     </div>
     <div class="col-2 text-center text-white"><br>
         <a href="{{ url_for('subirprod') }}">
@@ -33,23 +33,58 @@
         </a>
     </div>
     <div class="col-5 text-center text-white py-1 bg-dark"><br>
-        <h1>----------------------------------</h1>
+        <hr>
     </div>
     <br>
-    <div class="col-6 text-center text-white" style="background-color:rgb(15, 134, 35)">
-        Nombre <br>
-        Apellido <br>
-        Correo
+</div>
+<hr>
+<div class="row container-fluid">
+    <div class="col-6 text-white text-center bg-secondary">
+        <b>
+            <h4><br>
+                Nombre: {{ usuario['nombre_usuario'] }}<br>
+                Apellido: {{ usuario['apellido_usuario'] }}<br>
+                Correo: {{ usuario['user'] }}
+            </h4>
+        </b>
     </div>
-    <div class="col-6 text-center text-white" style="background-color:rgb(255, 0, 0)">
-        <div class="card" style="width: 10rem;">
-            <img src="..." class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title text-black">.pdf</h5>
-              <a href="#" class="btn btn-primary">Descargar</a>
+    {% for archivo in archivos%}
+    <div class="col-6 text-white bg-secondary py-2">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{{archivo['ruta_imagen_archivo']}}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body text-black">
+                  <h5 class="card-title"> <b>Nombre: {{archivo['nombre_archivo']}}</b> </h5>
+                  <p class="card-text">
+                    <b>
+                        <div>
+                            Tipo Archivo: {{archivo['tipo_archivo']}}
+                        </div>
+                        <div>
+                            Peso: {{archivo['peso_archivo']}}
+                        </div>
+                    </b>
+                  </p>
+                  <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <a href="{{ url_for('subirprod') }}">
+                        <input type="button" value="Editar" class="btn btn-success">
+                    </a>
+                    <a href="{{ url_for('vistaPrevia') }}">
+                        <input type="button" value="Vista" class="btn btn-warning">
+                    </a>
+                    <a href="{{ url_for('vistaPrevia') }}">
+                        <input type="button" value="Eliminar" class="btn btn-danger">
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
+          </div>
     </div>
+    {% endfor %}
 </div>
 
 
