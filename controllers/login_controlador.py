@@ -1,7 +1,9 @@
 from multiprocessing.spawn import import_main_path
-from flask import flash
+from flask import flash,session
 from models import consult_users
 import hashlib
+def estaIniciado():
+    return True if 'usuario_id' in session else False
 def login_controlador(user,contraseña):
     try:
         password = contraseña

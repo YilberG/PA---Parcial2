@@ -10,14 +10,44 @@
     
 </body>
 <div class="row">
-    <div class="col-2" style="background-color:rgba(0, 0, 0, 1.0)">
+    <div class="col-2 bg-dark">
         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" width="150" height="150">
     </div>
-    <div class="col-8 text-center text-white" style="background-color:rgba(0, 0, 0, 1.0)">
+    <div class="col-8 text-center text-white bg-dark">
         <h1> <br> Perfil del usuario</h1>
+        <a href="{{ url_for('cerrarSesion') }}">
+            <input type="button" value="Cerrar Session" class="btn btn-outline-light">
+        </a>
     </div>
-    <div class="col-2" style="background-color:rgba(0, 0, 0, 1.0)">
+    <div class="col-2 bg-dark">
+    </div>
+    <div class="col-5 text-center text-white py-1 bg-dark"><br>
+        <h1>----------------------------------</h1>
+    </div>
+    <div class="col-2 text-center text-white"><br>
+        <a href="{{ url_for('subirprod') }}">
+            <input type="button" value="Subir Nuevo Producto" class="btn btn-outline-dark">
+        </a>
+    </div>
+    <div class="col-5 text-center text-white py-1 bg-dark"><br>
+        <h1>----------------------------------</h1>
+    </div>
+    <br>
+    <div class="col-6 text-center text-white" style="background-color:rgb(15, 134, 35)">
+        Nombre <br>
+        Apellido <br>
+        Correo
+    </div>
+    <div class="col-6 text-center text-white" style="background-color:rgb(255, 0, 0)">
+        <div class="card" style="width: 10rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title text-black">.pdf</h5>
+              <a href="#" class="btn btn-primary">Descargar</a>
+            </div>
+        </div>
     </div>
 </div>
+
 
 {% endblock %}

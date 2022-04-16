@@ -20,6 +20,7 @@
     <div class="col-4 bg-dark text-center text-white">
         <br><h1>INICIO</h1>
     </div>
+    {%if validarLogin == False%}
     <div class="col-4 bg-dark text-center text-white"><br>
         <a href="{{ url_for('login') }}">
             <input type="button" value="Iniciar Sesion" class="btn btn-outline-light">
@@ -28,6 +29,19 @@
             <input type="button" value="Registro" class="btn btn-outline-light">
         </a>
     </div>
+    {% endif %}
+    {% if validarLogin == True %}
+
+    <div class="col-4 bg-dark text-center text-white"><br>
+        <a href="{{ url_for('perfilUsuario') }}">
+            perfil
+        </a>
+    </div>
+
+    {% endif %}
+</div>
+<div class="row">
+
 </div>
     <a href="{{ url_for('login') }}">INICIAR SESION</a>
 {% endblock %}
