@@ -56,7 +56,7 @@ def loginPost():
 
 @app.get("/register")
 def register():
-    return render_template("usuarios/register.html")
+    return render_template("registros/register.html")
 
 @app.post("/register")
 def registerPost():
@@ -67,7 +67,7 @@ def registerPost():
     
 
     if not registro_controlador.registro_controlador(name,user,contraseña):
-        return render_template("usuarios/register.html", name=name, user = user, last_name = last_name)
+        return render_template("registros/register.html", name=name, user = user, last_name = last_name)
     
     registro_controlador.DBregistro_controlador(name,last_name,user,contraseña)
     return redirect(url_for('index')) 
@@ -86,13 +86,13 @@ def validar_cuenta(token):
 #RESTABLECER LA CONTRASEÑA------------------------------------------------------------
 @app.get('/recuperarPass')
 def recuperarPass():
-    return render_template("/usuarios/recuperarPass.html")
+    return render_template("/formularios/recuperarPass.html")
 
 @app.post('/recuperarPass')
 def recuperarPassPost():
     user = request.form.get('user')
     if not recuperarPass_controlador.recuperarPassControlador(user):
-        return render_template("/usuarios/recuperarPass.html", user = user)
+        return render_template("/formularios/recuperarPass.html", user = user)
     
     recuperarPass_controlador.DBrecuperarPassControlador(user)
     return render_template('index.html')
@@ -103,7 +103,7 @@ def formularioPassRec(url):
     if not usuario:
         return render_template('/fallos/urlnotexits.html')
     else:
-        return render_template('/usuarios/formularioPass.html',url=url)
+        return render_template('/formularios/formularioPass.html',url=url)
 @app.post('/recuperarPass/<url>')
 def formularioPassRecPost(url):
     usuario = consult_users.traerUrlUsuario(url)
@@ -112,7 +112,7 @@ def formularioPassRecPost(url):
     else:
         contraseña = request.form.get('password')
         if not contraseña_controlador.validacionPassControlador(contraseña):
-            return render_template('/usuarios/formularioPass.html',url=url)
+            return render_template('/formularios/formularioPass.html',url=url)
         contraseña_controlador.enviarBDNewPassword(url,contraseña)
         return render_template('index.html')
 #PERFIL DEL PERFIL-----------------------------------------------------------
@@ -128,7 +128,7 @@ def subirprod():
     validarLogin = True
     if not login_controlador.estaIniciado():
         return redirect(url_for('login'))
-    return render_template('/usuarios/subirProducto.html',validarLogin=validarLogin)
+    return render_template('/archivos/subirProducto.html',validarLogin=validarLogin)
 
 @app.post('/subirProducto')
 def subirprodPost():
@@ -140,14 +140,14 @@ def subirprodPost():
     acceso = request.form.get('acceso')
     print (archivo)
     if not archivo_controlador.validarArchivo(nombre,archivo,acceso):
-        return render_template('/usuarios/subirProducto.html',nombre=nombre,validarLogin=validarLogin)
+        return render_template('/archivos/subirProducto.html',nombre=nombre,validarLogin=validarLogin)
     archivo_controlador.enviar_archivo_BD(str(session.get('usuario_id')),nombre,archivo,acceso)
     return render_template('index.html',validarLogin=validarLogin)
 
 #ACTUALIZAR PRODUCTOS-------------------------------------------------------
 @app.get('/actualizarProducto')
 def actualizarProducto():
-    return render_template('/usuarios/actualizarProducto.html')
+    return render_template('/archivos/actualizarProducto.html')
 
 #@app.post('actualizarProducto')
 #def actualizarProductoPost(actualizarProducto):
