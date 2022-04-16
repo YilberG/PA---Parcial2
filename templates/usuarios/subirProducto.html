@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block contenido %}
-<body>
+<body background="https://cdn.pixabay.com/photo/2018/06/13/09/32/technology-3472294_960_720.jpg">
     
 </body>
 <div class="row">
@@ -14,24 +14,30 @@
         <img src="https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118929_960_720.png" width="150" height="150">
     </div>
     <div class="col-8 text-center text-white" style="background-color:rgba(0, 0, 0, 1.0)">
-        <h1> <br> SUBIR PRODUCTO</h1>
+        <h1> <br> <b>SUBIR PRODUCTO</b> </h1>
     </div>
-    <div class="col-2" style="background-color:rgba(0, 0, 0, 1.0)">
+    <div class="col-2" style="background-color:rgba(0, 0, 0, 1.0)"> <br><br>
+        <a href="{{ url_for('perfilUsuario') }}">
+            <input type="button" value="volver" class="btn btn-outline-danger">
+        </a>
+        <a href="{{ url_for('cerrarSesion') }}">
+            <input type="button" value="Cerrar Session" class="btn btn-outline-danger">
+        </a>
     </div>
-    <div class=" text-center">
-        <form action="{{url_for('subirprodPost')}}" enctype="multipart/form-data" method="POST">
-            <input type="file" name="imagen" id="">
+    <div class="text-center">
+        <form action="{{url_for('subirprodPost')}}" enctype="multipart/form-data" method="POST"><br>
+            <input type="file" name="imagen" id="" class="btn btn-success" >
             <div class=" container form-group">
-                <label for="nombre">Nombre Del Archivo</label>
+                <label for="nombre"> <b>Nombre Del Archivo</b> </label>
                 <input type="text" name="nombre" value="{{nombre}}" id="nombre" class="form-control">
             </div>
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="SI" id="flexCheckIndeterminate" name="acceso">
-                <label class="form-check-label" for="flexCheckIndeterminate">
-                  Acceso Publico
-                </label>
+                    <label class="form-check-label" for="flexCheckIndeterminate">
+                    <input class="form-check-input" type="checkbox" value="SI" id="flexCheckIndeterminate" name="acceso">
+                    <b>Archivo Publico</b>
+                    </label>
             </div>
-            <button type="submit">
+            <button type="submit" class="btn btn-success">
                 Subir
             </button>
         </form>

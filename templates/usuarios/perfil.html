@@ -14,19 +14,22 @@
         <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" width="150" height="150">
     </div>
     <div class="col-8 text-center text-white bg-dark">
-        <h1> <br> Perfil del usuario</h1>
-        <a href="{{ url_for('cerrarSesion') }}">
-            <input type="button" value="Cerrar Session" class="btn btn-outline-light">
-        </a>
+        <h1> <br> <b>PERFIL</b></h1>
     </div>
-    <div class="col-2 bg-dark">
+    <div class="col-2 bg-dark"> <br><br>
+        <a href="{{ url_for('index') }}">
+            <input type="button" value="volver" class="btn btn-outline-danger">
+        </a>
+        <a href="{{ url_for('cerrarSesion') }}">
+            <input type="button" value="Cerrar Session" class="btn btn-outline-danger">
+        </a>
     </div>
     <div class="col-5 text-center text-white py-1 bg-dark"><br>
         <h1>----------------------------------</h1>
     </div>
     <div class="col-2 text-center text-white"><br>
         <a href="{{ url_for('subirprod') }}">
-            <input type="button" value="Subir Nuevo Producto" class="btn btn-outline-dark">
+            <input type="button" value="Subir Nuevo Producto" class="btn btn-success">
         </a>
     </div>
     <div class="col-5 text-center text-white py-1 bg-dark"><br>

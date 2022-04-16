@@ -34,14 +34,29 @@
 
     <div class="col-4 bg-dark text-center text-white"><br>
         <a href="{{ url_for('perfilUsuario') }}">
-            perfil
+            <input type="button" value="Perfil" class="btn btn-outline-warning">
+        </a>
+        <a href="{{ url_for('cerrarSesion') }}">
+            <input type="button" value="Cerrar Session" class="btn btn-outline-danger">
         </a>
     </div>
 
     {% endif %}
 </div>
-<div class="row">
+<hr>
+<div class="row container-fluid">
+        <div class="col-12 text-center text-white bg-secondary">
+            <div class="card" style="width: 10rem;">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title text-black">.pdf</h5>
+                  <a href="#" class="btn btn-primary">Descargar</a>
+                </div>
+            </div>
+        </div>
 
 </div>
-    <a href="{{ url_for('login') }}">INICIAR SESION</a>
+<div class="col-12 text-center"> <hr>
+    <img src="https://sigedin.itp.edu.co/sigeitp/sigedin_excel/imagenes/Logo_ITP%20(1).png" width="150" height="150">
+</div>
 {% endblock %}
