@@ -126,7 +126,7 @@ def formularioPassRecPost(url):
             return render_template('/formularios/formularioPass.html',url=url)
         contraseña_controlador.enviarBDNewPassword(url,contraseña)
         return render_template('index.html', validarLogin=validarLogin)
-#PERFIL DEL PERFIL-----------------------------------------------------------
+#PERFIL DEL USUARIO-----------------------------------------------------------
 @app.get('/perfil')
 def perfilUsuario():
     validarLogin = True
@@ -158,14 +158,17 @@ def subirprodPost():
     archivo_controlador.enviar_archivo_BD(str(session.get('usuario_id')),nombre,archivo,acceso)
     return redirect(url_for('perfilUsuario'))
 
-#ACTUALIZAR PRODUCTOS-------------------------------------------------------
-@app.get('/actualizarProducto')
-def actualizarProducto():
-    return render_template('/archivos/actualizarProducto.html')
+#EDITAR PRODUCTOS-------------------------------------------------------
+@app.get('/editarProducto')
+def editarProducto():
+    validarLogin = True
+    if not login_controlador.estaIniciado():
+        validarLogin = False
+    return render_template('/archivos/editarProducto.html',validarLogin=validarLogin)
 
-#@app.post('actualizarProducto')
-#def actualizarProductoPost(actualizarProducto):
-#    return actualizarProducto
+@app.post('/editarProducto')
+def editarProductoPost(editarProducto):
+    return editarProducto
 
 #CERRRAR SESSION-------------------------------------------------------------------
 
@@ -176,15 +179,20 @@ def cerrarSesion():
     return redirect(url_for('login'))
 
 #VISTA PREVIA DE UN PRODUCTO------------------------------------------------------------
-@app.get("/vistaPrevia")
-def vistaPrevia():
+@app.get("/vistaPrevia/<id_producto>")
+def vistaPrevia(id_producto):
     validarLogin = True
     if not login_controlador.estaIniciado():
         validarLogin = False
-    return render_template('/archivos/vistaPrevia.html',validarLogin=validarLogin)
+    archivo = consult_archivos.vistaPrevia_archivos(id_producto)
+    return render_template('/archivos/vistaPrevia.html',validarLogin=validarLogin, archivo = archivo)
 
-@app.post("/vistaPrevia")
-def vistaPreviaPost():
-    
-    return vistaPrevia
+#ELIMINAR PRODUCTO----------------------------------------------------------------------
+@app.get("/eliminar/<id_producto>")
+def eliminarProducto(id_producto):
+    validarLogin = True
+    if not login_controlador.estaIniciado():
+        return redirect(url_for('login'))
+    consult_archivos.eliminar_productos(id_producto,str(session.get('usuario_id')))
+    return redirect(url_for('perfilUsuario'))
 app.run(debug=True)

@@ -17,6 +17,29 @@
 CREATE DATABASE IF NOT EXISTS `imagenes` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `imagenes`;
 
+-- Volcando estructura para tabla imagenes.archivos
+CREATE TABLE IF NOT EXISTS `archivos` (
+  `id_producto` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_usuario` bigint(20) DEFAULT NULL,
+  `nombre_archivo` varchar(255) DEFAULT NULL,
+  `ruta_archivo` varchar(255) DEFAULT NULL,
+  `tipo_archivo` varchar(255) DEFAULT NULL,
+  `peso_archivo` varchar(255) DEFAULT NULL,
+  `acceso_archivo` varchar(255) DEFAULT NULL,
+  `url_compartir_archivo` varchar(255) DEFAULT NULL,
+  `ruta_imagen_archivo` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_producto`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- Volcando datos para la tabla imagenes.archivos: ~2 rows (aproximadamente)
+/*!40000 ALTER TABLE `archivos` DISABLE KEYS */;
+INSERT IGNORE INTO `archivos` (`id_producto`, `id_usuario`, `nombre_archivo`, `ruta_archivo`, `tipo_archivo`, `peso_archivo`, `acceso_archivo`, `url_compartir_archivo`, `ruta_imagen_archivo`) VALUES
+	(4, 18, 'escrito', './static/images/2022-04-16_17_49_40_400269.pdf', 'pdf', '6.4 MB', 'SI', 'wx9dNenZyZIdKyupGCsHVRMmkxF4VjzkPJaTPgeMXigjWkWGWpBS0PJqXY6vyo0QFwKpzlhrRHFzfNidzVE9rcxd1UFoHacaWTgq', './static/images/tipo_archivos/file_pdf.png'),
+	(5, 18, 'ecaes', './static/images/2022-04-16_18_18_29_975631.docx', 'docx', '2.8 MB', 'SI', 'jRxqyBISb4sIfS5UMoKmWxxBFITRH9U0v23JCISPdKxFSkrgFNcduyisoLZL9KCI88ILSW1qmMVn3tdWPm5mMcKQxWEtEQyiU8Re', './static/images/tipo_archivos/file_word.png'),
+	(6, 18, 'Cornetto - Polvo Rosa (Extended)', './static/images/2022-04-16_18_19_25_631943.mp3', 'mp3', '9.8 MB', 'SI', 'kzWRuE8cYkkt28VnysG8wXZBTpJx1CItwYlqRmbv8MWxeAjlkRpB3hBqmYrR6Oqu5u7GlbQwVgGY5BULeLCUMbJuIyl5NMbySXrU', './static/images/tipo_archivos/file_mp3.png'),
+	(7, 18, 'Party', './static/images/2022-04-16_18_24_7_778169.mp4', 'mp4', '18.8 MB', 'SI', 'aWLHyVnqV49WtWoct54qmwBtVBheolkDXMZgEUfJE7AlEK1Ufir5gtScgiecKEAkEXuxyltOm4Am7xauuZ8YEFR6gD5dQ6i6dl3N', './static/images/tipo_archivos/file_mp4.png');
+/*!40000 ALTER TABLE `archivos` ENABLE KEYS */;
+
 -- Volcando estructura para tabla imagenes.usuarios
 CREATE TABLE IF NOT EXISTS `usuarios` (
   `id_usuario` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -33,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 INSERT IGNORE INTO `usuarios` (`id_usuario`, `nombre_usuario`, `apellido_usuario`, `user`, `password`, `validate`, `tokenPass`) VALUES
 	(5, 'YILBER ', 'GUEVARA', 'yilber-88@hotmail.com', 'dbae2dd6daf2b924ac945f2220847e64c2673d89d751d8ae2b4735999539b51026aebf39cea53d47432fa656c696332e0a9f6e762f9f6f2506335230e309ca60', 'true', NULL),
-	(6, 'YILBER ', 'GUEVARA', 'sauteuppegowu-1555@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'true', NULL),
+	(6, 'YILBER ', 'GUEVARA', 'sauteuppegowu-1555@yopmail.com', '04ff751a451995fd412ed405fcace61984acffe7b1622af2d5a4230d2a34c34a25fb8da496e5929cf698a11d597774a79a1e9c98a54dfc4178596ccc365ee213', 'true', ''),
 	(7, 'YILBER ', 'GUEVARA', 'gugogrulaprau-6603@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'Tp0BO', NULL),
 	(8, 'YILBER ', 'GUEVARA', 'nebabippene-5501@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'si', NULL),
 	(9, 'YILBER ', 'GUEVARA', 'vavejatroipru-9309@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'true', NULL),
@@ -46,9 +69,9 @@ INSERT IGNORE INTO `usuarios` (`id_usuario`, `nombre_usuario`, `apellido_usuario
 	(16, 'YILBER ', 'GUEVARA', 'bazarabreuddei-1504@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'true', NULL),
 	(17, 'YILBER ', 'GUEVARA', 'juttetticoippa-9410@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'true', NULL),
 	(18, 'YILBER ', 'GUEVARA', 'freimeiwoxinnei-3676@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'si', 'lZFdFR1jYy'),
-	(19, 'YILBER ', 'GUEVARA', 'grotausseheico-2663@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'si', NULL),
+	(19, 'YILBER ', 'GUEVARA', 'grotausseheico-2663@yopmail.com', '04ff751a451995fd412ed405fcace61984acffe7b1622af2d5a4230d2a34c34a25fb8da496e5929cf698a11d597774a79a1e9c98a54dfc4178596ccc365ee213', 'si', ''),
 	(20, 'YILBER ', 'GUEVARA', 'jabugucabroi-8449@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'si', NULL),
-	(21, 'YILBER ', 'GUEVARA', 'biseicrocrifreu-2881@yopmail.com', '4dc7900b78a255de33390ce6681d1a14f782e440eec938cd0a25acfa1428a5930a5e7b63bf4dde2f1c69c911d6c0bb545a60b5f869434ce55db20520d530435c', 'si', '');
+	(21, 'YILBER ', 'GUEVARA', 'biseicrocrifreu-2881@yopmail.com', '05be276766564accacc6286ca0593d2b66ee9be012f2b35abc352df4bf044ab998cb72c71a940a853cb84e7defba48ee4220464e3676528d935dd307386ac0f3', 'si', '');
 /*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
