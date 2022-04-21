@@ -1,14 +1,14 @@
 {% extends 'base/base.html' %}
 
 {% block titulo %}
-    EDITAR PRODUCTO
+    VISTA PREVIA
 {% endblock %}
 
 {% block contenido %}
 <head>
     <link rel="icon" type="https://cdn.sstatic.net/Sites/es/img/apple-touch-icon.png?v=7739871010e6">
 </head>
-<body>
+<body background="https://cdn.pixabay.com/photo/2018/06/13/09/32/technology-3472294_960_720.jpg">
 
 </body>
 <div class="row">
@@ -18,7 +18,7 @@
         </svg>
     </div>
     <div class="col-4 bg-dark text-center text-white">
-        <br><h1><b>VISTA PREVIA</b></h1>
+        <br><h1><b>EDITAR PRODUCTO</b></h1>
     </div>
     {%if validarLogin == False%}
     <div class="col-4 bg-dark text-center text-white"><br>
@@ -45,33 +45,66 @@
 </div>
 <hr>
 <div class="row container-fluid">
-    {% for archivo in archivos%}
-    <div class="col-12 text-white bg-secondary py-2">
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="{{archivo['ruta_imagen_archivo']}}" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body text-black">
-                  <h5 class="card-title"> <b>Nombre: {{archivo['nombre_archivo']}}</b> </h5>
-                  <p class="card-text">
-                    <b>
-                        <div>
-                            Tipo Archivo: {{archivo['tipo_archivo']}}
-                        </div>
-                        <div>
-                            Peso: {{archivo['peso_archivo']}}
-                        </div>
-                    </b>
-                  </p>
-                  <a href="#" class="btn btn-primary">Descargar</a>
+    <center>
+        <div class="col-12 text-white py-2" style="background-color:rgba(0, 0, 0, 0.5)">
+            <div class="card mb-3" style="max-width:100%; background-color:rgb(255, 255, 255)">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src=".{{archivo['ruta_imagen_archivo']}}" class="img-fluid rounded-start" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body text-black">
+                      <h5 class="card-title"> <b><h1>Nombre: {{archivo['nombre_archivo']}}</h1></b> </h5>
+                      <p class="card-text"><br><br>
+                        <b>
+                            <h2>
+                                <div>
+                                    Tipo Archivo: {{archivo['tipo_archivo']}}
+                                </div>
+                                <div>
+                                    Peso:{{archivo['peso_archivo']}}
+                                </div>
+                            </h2>
+                        </b>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
+        </div>
+    </center>
+    <div class="text-center">
+        <form action="/editarProducto/{{archivo['id_producto']}}" enctype="multipart/form-data" method="POST"><br>
+            <input type="file" name="imagen" id="" class="btn btn-success" >
+            <div class=" container form-group">
+                <label for="nombre"> <b>Nombre Del Archivo</b> </label>
+                <input type="text" name="nombre" value="{{nombre}}" id="nombre" class="form-control">
             </div>
-          </div>
-    </div>
+            <div class="form-check">
+                    <label class="form-check-label" for="flexCheckIndeterminate">
+                {% if acceso == 'NO' %}
+                        <input class="form-check-input" type="checkbox" value="SI" id="flexCheckIndeterminate" name="acceso">
+                {% endif %}
+                {% if acceso == 'SI' %}
+                    <input class="form-check-input" type="checkbox" value="SI" id="flexCheckIndeterminate" name="acceso" checked>
+                {% endif %}
+                    <b>Archivo Publico</b>
+                    </label>
+            </div>
+            <button type="submit" class="btn btn-success">
+                Editar
+            </button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class="alert alert-danger">
+    {% for message in messages %}
+        <li>{{ message }}</li>
     {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+    </div>
 </div>
 <div class="col-12 text-center"> <hr>
     <img src="https://sigedin.itp.edu.co/sigeitp/sigedin_excel/imagenes/Logo_ITP%20(1).png" width="150" height="150">

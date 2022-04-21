@@ -29,3 +29,15 @@ def vistaPrevia_archivos(vistaPrevia):
     productos = Cursor.fetchone()
     Cursor.close()
     return productos
+
+#EDITAR PRODUCTO
+def editarNombre(nombre_producto,id_producto,acceso):
+    Cursor = db.cursor()
+    Cursor.execute('update archivos set nombre_archivo = "'+nombre_producto+'",acceso_archivo = "'+ acceso +'" where id_producto = "'+id_producto+'" ')
+    Cursor.close()
+
+#EDITAR TODO EL PRODUCTO
+def editarTodo(nombre_archivo, ruta_archivo, ruta_imagen_archivo, tipo_archivo, peso_archivo, id_producto, acceso_archivo):
+    Cursor = db.cursor()
+    Cursor.execute('update archivos set nombre_archivo = "'+nombre_archivo+'",ruta_archivo = "'+ ruta_archivo +'",ruta_imagen_archivo = "'+ ruta_imagen_archivo +'", tipo_archivo = "'+ tipo_archivo +'", peso_archivo = "'+ peso_archivo +'", acceso_archivo = "'+ acceso_archivo +'" where id_producto = "'+id_producto+'" ')
+    Cursor.close()

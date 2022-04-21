@@ -2,13 +2,17 @@ from ast import Return
 from cmath import pi
 from email.mime import image
 from email.quoprimime import body_check
+from mmap import ACCESS_COPY
 from operator import truediv
+from os import access
 from pickletools import read_uint1
 from random import random
+from select import select
+from stat import IO_REPARSE_TAG_SYMLINK
 import string
 from turtle import title
 from click import password_option
-from flask import Flask, render_template, request, redirect, url_for, flash,session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, send_from_directory
 from models import consult_users
 from models import register_user
 import hashlib
@@ -21,6 +25,7 @@ from controllers import recuperarPass_controlador
 from controllers import contraseña_controlador
 from controllers import archivo_controlador
 from models import consult_archivos
+from controllers import editar_controlador
 
 app = Flask(__name__)
 app.secret_key = 'XDXDXDXDXDX'
@@ -158,17 +163,45 @@ def subirprodPost():
     archivo_controlador.enviar_archivo_BD(str(session.get('usuario_id')),nombre,archivo,acceso)
     return redirect(url_for('perfilUsuario'))
 
-#EDITAR PRODUCTOS-------------------------------------------------------
-@app.get('/editarProducto')
-def editarProducto():
+#DESCARGAR EL ARCHIVO-----------------------------------------------------------------
+@app.get('/descargar/<id>')
+def descargar(id):
     validarLogin = True
     if not login_controlador.estaIniciado():
         validarLogin = False
-    return render_template('/archivos/editarProducto.html',validarLogin=validarLogin)
+    archivo = consult_archivos.vistaPrevia_archivos(id)
+    return send_from_directory('./static/images/',path = archivo['ruta_archivo'], as_attachment = True)
 
-@app.post('/editarProducto')
-def editarProductoPost(editarProducto):
-    return editarProducto
+#EDITAR PRODUCTOS-------------------------------------------------------
+@app.get('/editarProducto/<id>')
+def editarProducto(id):
+    validarLogin = True
+    if not login_controlador.estaIniciado():
+        return redirect(url_for('login'))
+    archivo = consult_archivos.vistaPrevia_archivos(id)
+    nombre = archivo['nombre_archivo']
+    acceso = archivo['acceso_archivo']
+    return render_template('/archivos/editarProducto.html',validarLogin=validarLogin, archivo = archivo, nombre = nombre, acceso = acceso)
+
+@app.post('/editarProducto/<id>')
+def editarProductoPost(id):
+    validarLogin = True
+    if not login_controlador.estaIniciado():
+        return redirect(url_for('login'))
+    nombreArchivo = request.form.get('nombre')
+    archivo = consult_archivos.vistaPrevia_archivos(id)
+    acceso = request.form.get('acceso')
+    archivo_a_subir = request.files['imagen']
+    validar_acceso = editar_controlador.retornar_acceso(acceso)
+    if nombreArchivo == '':
+        flash ('NO SE PUEDE ENVIAR EL NOMBRE VACIO :v')
+        return render_template('/archivos/editarProducto.html',validarLogin=validarLogin, nombre = nombreArchivo, acceso = validar_acceso, archivo = archivo)    
+    if archivo_a_subir.filename == '':
+        editar_controlador.cambiar_nombre(nombreArchivo, id, validar_acceso)
+        return redirect(url_for('perfilUsuario'))
+    else:
+        editar_controlador.cambiar_todo(nombreArchivo, id, validar_acceso, archivo_a_subir)
+        return redirect(url_for('perfilUsuario'))
 
 #CERRRAR SESSION-------------------------------------------------------------------
 

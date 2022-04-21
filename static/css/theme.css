@@ -1,0 +1,9 @@
+input.clipboard:focus{
+    outline: none;
+}
+input.clipboard::-moz-selection{
+    background-color: transparent;
+}
+input.clipboard::selection{
+    background-color: transparent;
+}

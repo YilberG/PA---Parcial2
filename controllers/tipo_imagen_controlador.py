@@ -2,7 +2,7 @@ def tipo_archivo(tipo_archivo,ruta_archivo):
     vista = './static/images/tipo_archivos/file_desconocido.jpg'
     
     if tipo_archivo in ['jpg','png','gif','tiff','psd','bmp','eps','svg']:
-        vista = ruta_archivo
+        vista = './static/images/' + ruta_archivo
     if tipo_archivo in ['html','htm']:
         vista = './static/images/tipo_archivos/file_html.png'
     if tipo_archivo == 'exe':
