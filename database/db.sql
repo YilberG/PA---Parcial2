@@ -26,18 +26,15 @@ CREATE TABLE IF NOT EXISTS `archivos` (
   `tipo_archivo` varchar(255) DEFAULT NULL,
   `peso_archivo` varchar(255) DEFAULT NULL,
   `acceso_archivo` varchar(255) DEFAULT NULL,
-  `url_compartir_archivo` varchar(255) DEFAULT NULL,
   `ruta_imagen_archivo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_producto`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
--- Volcando datos para la tabla imagenes.archivos: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla imagenes.archivos: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `archivos` DISABLE KEYS */;
-INSERT IGNORE INTO `archivos` (`id_producto`, `id_usuario`, `nombre_archivo`, `ruta_archivo`, `tipo_archivo`, `peso_archivo`, `acceso_archivo`, `url_compartir_archivo`, `ruta_imagen_archivo`) VALUES
-	(4, 18, 'escrito', './static/images/2022-04-16_17_49_40_400269.pdf', 'pdf', '6.4 MB', 'SI', 'wx9dNenZyZIdKyupGCsHVRMmkxF4VjzkPJaTPgeMXigjWkWGWpBS0PJqXY6vyo0QFwKpzlhrRHFzfNidzVE9rcxd1UFoHacaWTgq', './static/images/tipo_archivos/file_pdf.png'),
-	(5, 18, 'ecaes', './static/images/2022-04-16_18_18_29_975631.docx', 'docx', '2.8 MB', 'SI', 'jRxqyBISb4sIfS5UMoKmWxxBFITRH9U0v23JCISPdKxFSkrgFNcduyisoLZL9KCI88ILSW1qmMVn3tdWPm5mMcKQxWEtEQyiU8Re', './static/images/tipo_archivos/file_word.png'),
-	(6, 18, 'Cornetto - Polvo Rosa (Extended)', './static/images/2022-04-16_18_19_25_631943.mp3', 'mp3', '9.8 MB', 'SI', 'kzWRuE8cYkkt28VnysG8wXZBTpJx1CItwYlqRmbv8MWxeAjlkRpB3hBqmYrR6Oqu5u7GlbQwVgGY5BULeLCUMbJuIyl5NMbySXrU', './static/images/tipo_archivos/file_mp3.png'),
-	(7, 18, 'Party', './static/images/2022-04-16_18_24_7_778169.mp4', 'mp4', '18.8 MB', 'SI', 'aWLHyVnqV49WtWoct54qmwBtVBheolkDXMZgEUfJE7AlEK1Ufir5gtScgiecKEAkEXuxyltOm4Am7xauuZ8YEFR6gD5dQ6i6dl3N', './static/images/tipo_archivos/file_mp4.png');
+INSERT IGNORE INTO `archivos` (`id_producto`, `id_usuario`, `nombre_archivo`, `ruta_archivo`, `tipo_archivo`, `peso_archivo`, `acceso_archivo`, `ruta_imagen_archivo`) VALUES
+	(9, 18, 'Programa', '2022-04-20_16_37_3_774452.html', 'html', '748.0 bytes', 'SI', './static/images/tipo_archivos/file_html.png'),
+	(11, 18, 'imagen', '2022-04-20_16_42_55_140435.png', 'png', '896.0 KB', 'SI', './static/images/2022-04-20_16_42_55_140435.png');
 /*!40000 ALTER TABLE `archivos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla imagenes.usuarios
