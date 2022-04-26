@@ -1,17 +1,3 @@
-from ast import Return
-from cmath import pi
-from email.mime import image
-from email.quoprimime import body_check
-from mmap import ACCESS_COPY
-from operator import truediv
-from os import access
-from pickletools import read_uint1
-from random import random
-from select import select
-from stat import IO_REPARSE_TAG_SYMLINK
-import string
-from turtle import title
-from click import password_option
 from flask import Flask, render_template, request, redirect, url_for, flash, session, send_from_directory
 from models import consult_users
 from models import register_user
