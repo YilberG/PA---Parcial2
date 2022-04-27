@@ -24,5 +24,5 @@ def DBrecuperarPassControlador(user):
     register_user.urlcontraseña( user=user, url=url )
 
     title = 'RECUPERACION DE LA CUENTA'
-    body = '<h3> para recuperar la cuenta ingresar a <a style="color: blue;" href="http://127.0.0.1:5000/recuperarPass/'+url+'">aqui</a> '
+    body = '<h3> para recuperar la cuenta ingresar a <a style="color: blue;" href="https://flask-parcial2.herokuapp.com/recuperarPass/'+url+'">aqui</a> '
     send_mail.send_validate_email(user = user, title = title, body = body)
