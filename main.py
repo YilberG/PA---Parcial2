@@ -214,4 +214,4 @@ def eliminarProducto(id_producto):
         return redirect(url_for('login'))
     consult_archivos.eliminar_productos(id_producto,str(session.get('usuario_id')))
     return redirect(url_for('perfilUsuario'))
-app.run(debug=True)
+#app.run(debug=True)
