@@ -1,5 +1,5 @@
 def tipo_archivo(tipo_archivo,ruta_archivo):
-    vista = './static/images/tipo_archivos/file_desconocido.jpg'
+    vista = './static/tipo_archivos/file_desconocido.jpg'
     
     if tipo_archivo in ['jpg','png','gif','tiff','psd','bmp','eps','svg']:
         vista = './static/images/' + ruta_archivo
