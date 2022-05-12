@@ -1,0 +1,107 @@
+{% extends './base/base.html' %}
+
+{% block titulo %}
+    TABLA URL
+{% endblock %}
+
+{% block contenido %}
+    <meta content="es-ES">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style></style>
+    <script type="text/javascript">
+    (function(document) {
+      'use strict';
+
+      var LightTableFilter = (function(Arr) {
+
+        var _input;
+
+        function _onInputEvent(e) {
+          _input = e.target;
+          var tables = document.getElementsByClassName(_input.getAttribute('data-table'));
+          Arr.forEach.call(tables, function(table) {
+            Arr.forEach.call(table.tBodies, function(tbody) {
+              Arr.forEach.call(tbody.rows, _filter);
+            });
+          });
+        }
+
+        function _filter(row) {
+          var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+          row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+        }
+
+        return {
+          init: function() {
+            var inputs = document.getElementsByClassName('light-table-filter');
+            Arr.forEach.call(inputs, function(input) {
+              input.oninput = _onInputEvent;
+            });
+          }
+        };
+      })(Array.prototype);
+
+      document.addEventListener('readystatechange', function() {
+        if (document.readyState === 'complete') {
+          LightTableFilter.init();
+        }
+      });
+
+    })(document);
+    </script>
+  </head>
+  <body background="https://cdn.pixabay.com/photo/2017/02/15/11/05/texture-2068283_960_720.jpg">
+
+    <div class="container">
+      <div style="height:20px"></div>
+      
+      <p class="lead">
+      <h1><center>Urls</center></h1>
+      
+
+     <CENTER> <input class="form-control form-group col-6 light-table-filter" data-table="order-table" type="text" placeholder="Buscar..."></CENTER>
+      <hr>
+<CENTER>
+      <table class="table table-bordered order-table" >
+            <style type="text/css">
+                table.tableizer-table {
+                    font-size: 15px;
+                    border: 1px solid rgb(0, 0, 0); 
+                    font-family: Georgia, serif;
+                } 
+                .tableizer-table td {
+                    padding: 4px;
+                    margin: 3px;
+                    border: 1px solid rgb(0, 0, 0);
+                }
+                .tableizer-table th {
+                    background-color: #104E8B; 
+                    color: rgb(0, 0, 0);
+                    font-weight: bold;
+                }
+            </style>
+            
+            <thead><tr class="tableizer-firstrow">
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>NUEVA URL</th>
+            </tr></thead><tbody>
+                {% for urls in urls %}
+                <tr>
+                    <th>{{ urls['id'] }}</th>
+                    <th><a href="{{ urls['url'] }}" target="_blank">{{ urls['url'] }}</a></th>
+                    <th><a href="{{ urls['nueva'] }}" target="_blank">{{ urls['nueva'] }}</a></th>
+                </tr>
+                {% endfor %}
+            </tbody></table>
+            <div >
+              <a href="{{ url_for('inicio_Acortador') }}">
+                <input type="button" value="Pagina de inicio" class="btn btn-success">
+            </a>
+            <a href="{{ url_for('shortUrl') }}" class="btn btn-warning text-white">
+              nuevo
+            </a>
+            </div>
+ 
+        </table> </CENTER>
+        {% endblock %}

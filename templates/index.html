@@ -18,65 +18,31 @@
         </svg>
     </div>
     <div class="col-4 bg-dark text-center text-white">
-        <br><h1><b><b>INICIO </b> </b> </h1>
+        <br><h1><b><b>PROYECTO FINAL </b> </b> </h1>
     </div>
-    {%if validarLogin == False%}
     <div class="col-4 bg-dark text-center text-white"><br>
-        <a href="{{ url_for('login') }}">
-            <input type="button" value="Iniciar Sesion" class="btn btn-outline-light">
-        </a>&nbsp;
-        <a href="{{ url_for('register') }}">
-            <input type="button" value="Registro" class="btn btn-outline-light">
-        </a>
-    </div>
-    {% endif %}
-    {% if validarLogin == True %}
 
-    <div class="col-4 bg-dark text-center text-white"><br>
-        <a href="{{ url_for('perfilUsuario') }}">
-            <input type="button" value="Perfil" class="btn btn-outline-warning">
-        </a>
-        <a href="{{ url_for('cerrarSesion') }}">
-            <input type="button" value="Cerrar Session" class="btn btn-outline-danger">
-        </a>
     </div>
-
-    {% endif %}
 </div>
 <hr>
-<div class="row container-fluid">
-    {% for archivo in archivos%}
-    <div class="col-6 text-white py-2" style="background-color:rgba(0, 0, 0, 0.5)">
-        <div class="card mb-3" style="max-width: 540px; background-color:rgb(255, 255, 255)">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="{{archivo['ruta_imagen_archivo']}}" class="img-fluid rounded-start" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body text-black">
-                  <h5 class="card-title"> <b>Nombre: {{archivo['nombre_archivo']}}</b> </h5>
-                  <p class="card-text">
-                    <b>
-                        <div>
-                            Tipo Archivo: {{archivo['tipo_archivo']}}
-                        </div>
-                        <div>
-                            Peso: {{archivo['peso_archivo']}}
-                        </div>
-                    </b>
-                  </p>
-                    <a href="{{ url_for('subirprod') }}">
-                        <input type="button" value="Descargar" class="btn btn-success">
-                    </a>
-                    <a href="/vistaPrevia/{{archivo['id_producto']}}">
-                        <input type="button" value="Vista" class="btn btn-warning">
-                    </a>
-                </div>
-              </div>
-            </div>
-          </div>
-    </div>
-    {% endfor %}
+<div class="row text-center">
+        <div class="col-4">
+            <a href="{{ url_for('inicio_Acortador') }}">
+                <input type="button " value="PRIMER PARCIAL" class="btn btn-dark">
+            </a>
+        </div>
+        <div class="col-4">
+            <a href="{{ url_for('Inicio') }}">
+                <input type="button" value="SEGUNDO PARCIAL" class="btn btn-dark">
+            </a>
+        </div>
+        <div class="col-4">
+            <a href="">
+                <input type="button" value="PARCIAL FINAL" class="btn btn-dark">
+            </a>
+        </div>
+
+
 </div>
 <div class="col-12 text-center"> <hr>
     <img src="https://sigedin.itp.edu.co/sigeitp/sigedin_excel/imagenes/Logo_ITP%20(1).png" width="150" height="150">

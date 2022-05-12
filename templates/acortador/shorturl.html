@@ -1,0 +1,52 @@
+{% extends './base/base.html' %}
+
+{% block titulo %}
+    ACORTADOR DE URLS
+{% endblock %}
+
+{% block contenido %}
+<body background="https://cdn.pixabay.com/photo/2015/05/26/23/52/technology-785742_960_720.jpg">
+    <center>
+        <div class="row">
+            <div class="col-2 pb-3 my-2 bg-dark">
+                <img src="https://sibcolombia.net/wp-content/uploads/2017/08/logo-itp.png" width="121" height="121">
+              </div>
+            <div class="col-8 h1 text-center bg-dark text-white pb-3 my-2">
+                <h1>Acortador de URL'S</h1>
+                <a href="{{ url_for('index') }}">
+                    <input type="button" value="Pagina de inicio" class="btn btn-success">
+                </a>
+            </div>
+            <div class="col-2 bg-dark my-2">
+
+            </div>
+        </div>
+
+        <div class="h1 text-center text-white pb-4" style="background-color:rgba(0, 0, 0, 0.7)">
+            <form action="{{ url_for('shortUrlPost') }}" method="POST">
+
+
+                <label for="">inserta Url</label><br>
+                <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                  </svg>
+                <input type="text" name="url" required>
+                <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor" class="bi bi-arrow-left-circle" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                </svg>
+        </div>
+
+
+        <br>
+        <button type="submit" class="btn btn-info text-white">acortar</button>
+        <br>
+        <br>
+        <div class="h3 text-center text-white pb-4 container">
+            INSTITUTO TECNOLOGICO DEL PUTUMAYO <br>
+            MOCOA - PUTUMAYO <br>
+            2022
+        </div>
+    </form>
+    </center>
+</body>
+{% endblock %}

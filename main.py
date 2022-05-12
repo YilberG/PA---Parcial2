@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session, send_from_directory
 from models import consult_users
 from models import register_user
+from random import choice
+import mysql.connector,string
 import hashlib
 import send_mail
 import random
@@ -12,17 +14,14 @@ from controllers import contraseña_controlador
 from controllers import archivo_controlador
 from models import consult_archivos
 from controllers import editar_controlador
+from models import consult_urls
 
 app = Flask(__name__)
 app.secret_key = 'XDXDXDXDXDX'
 #INDEX-------------------------------------------------------
 @app.get("/")
 def index():
-    validarLogin = True
-    if not login_controlador.estaIniciado():
-        validarLogin = False
-    archivos = consult_archivos.traerArchivos()
-    return render_template("index.html",validarLogin=validarLogin, archivos = archivos)
+    return render_template("index.html")
 
 #LOGIN------------------------------------------------------
 @app.get("/login")
@@ -42,7 +41,7 @@ def loginPost():
         id = val['id_usuario']
     session['usuario_id'] = id
     
-    return redirect(url_for('index'))
+    return redirect(url_for('Inicio'))
     
 
 #REGISTRO DEL USUARIO-------------------------------------------
@@ -94,7 +93,7 @@ def recuperarPassPost():
         return render_template("/formularios/recuperarPass.html", user = user, validarLogin=validarLogin)
     
     recuperarPass_controlador.DBrecuperarPassControlador(user)
-    return render_template('index.html',validarLogin=validarLogin)
+    return render_template('/usuarios/Inicio.html',validarLogin=validarLogin)
     
 @app.get('/recuperarPass/<url>')
 def formularioPassRec(url):
@@ -116,7 +115,7 @@ def formularioPassRecPost(url):
         if not contraseña_controlador.validacionPassControlador(contraseña):
             return render_template('/formularios/formularioPass.html',url=url)
         contraseña_controlador.enviarBDNewPassword(url,contraseña)
-        return render_template('index.html', validarLogin=validarLogin)
+        return render_template('/usuarios/Inicio.html', validarLogin=validarLogin)
 #PERFIL DEL USUARIO-----------------------------------------------------------
 @app.get('/perfil')
 def perfilUsuario():
@@ -214,4 +213,48 @@ def eliminarProducto(id_producto):
         return redirect(url_for('login'))
     consult_archivos.eliminar_productos(id_producto,str(session.get('usuario_id')))
     return redirect(url_for('perfilUsuario'))
+
+#PAGINA DE INICIO---------------------------------------------------
+@app.get("/Inicio")
+def Inicio():
+    validarLogin = True
+    if not login_controlador.estaIniciado():
+        validarLogin = False
+    archivos = consult_archivos.traerArchivos()
+    return render_template("/usuarios/Inicio.html",validarLogin=validarLogin, archivos = archivos)
+
+#PAGINA INICIO (ACORTADOR)---------------------------------------------
+@app.get("/inicio_Acortador")
+def inicio_Acortador():
+    ultima = consult_urls.ultimaUrl()
+    return render_template("acortador/inicio_Acortador.html", ultima = ultima)
+
+@app.get("/shorturl")
+def shortUrl():
+    return render_template("acortador/shorturl.html")
+
+@app.post("/shorturl")
+def shortUrlPost():
+    nombreurl = request.form.get('url') #https://www.youtube.com/watch?v=Ox0vibQ6QZM
+    codigo = ''.join(choice(string.ascii_letters+string.digits) for _ in range(4))
+    nueva = request.host_url+codigo # http://127.0.0.1:5000/dsWN
+
+    urls = consult_urls.paginaUrls(nombreurl,codigo)
+
+    return redirect(url_for('inicio_Acortador', urls = urls))
+
+@app.get("/tabla")
+def tablaUrl():
+    urls = consult_urls.tablaUrl()
+    return render_template("acortador/tablaurl.html", urls=urls)
+
+@app.get("/redirect/<codigo>")
+def redirectnueva(codigo):
+    #shorturl = request.host_url+codigo # http://127.0.0.1:5000/dsWN
+    url = consult_urls.nueva(codigo)
+    print(url)
+    if(url != None): return redirect(url[0])
+    return redirect(url_for('inicio_Acortador'))
+
+
 app.run(debug=True)
