@@ -1,3 +1,4 @@
+from unicodedata import digit
 from flask import Flask, render_template, request, redirect, url_for, flash, session, send_from_directory
 from models import consult_users
 from models import register_user
@@ -15,6 +16,7 @@ from controllers import archivo_controlador
 from models import consult_archivos
 from controllers import editar_controlador
 from models import consult_urls
+from controllers import generarContraseña_controlador
 
 app = Flask(__name__)
 app.secret_key = 'XDXDXDXDXDX'
@@ -255,6 +257,26 @@ def redirectnueva(codigo):
     print(url)
     if(url != None): return redirect(url[0])
     return redirect(url_for('inicio_Acortador'))
+
+@app.get("/generador")
+def generador():
+
+    return render_template("generador_contraseñas/generador.html")
+
+@app.post("/generador")
+def generadorPost():
+    longitudCaracteres = request.form.get("longitud")
+    mayusculas = generarContraseña_controlador.validarCheken(request.form.get("mayusculas"))
+    minusculas = generarContraseña_controlador.validarCheken(request.form.get("minusculas"))
+    numeros = generarContraseña_controlador.validarCheken(request.form.get("numeros"))
+    simbolos = generarContraseña_controlador.validarCheken(request.form.get("simbolos"))
+    recivirContraseña = generarContraseña_controlador.generar(longitudCaracteres, mayusculas, minusculas, numeros, simbolos)
+
+    if recivirContraseña == False:
+        return render_template("generador_contraseñas/generador.html",longitudCaracteres = longitudCaracteres, mayusculas = mayusculas, minusculas = minusculas, numeros = numeros, simbolos = simbolos)
+    return render_template("generador_contraseñas/generador.html", recivirContraseña = recivirContraseña)
+
+
 
 
 app.run(debug=True)
