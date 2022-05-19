@@ -8,7 +8,7 @@
 <head>
     <link rel="icon" type="https://cdn.sstatic.net/Sites/es/img/apple-touch-icon.png?v=7739871010e6">
 </head>
-<body>
+<body background="https://cdn.pixabay.com/photo/2018/06/13/09/32/technology-3472294_960_720.jpg">
 
 </body>
 <div class="row">
@@ -18,7 +18,7 @@
         </svg>
     </div>
     <div class="col-8 bg-dark text-center text-white"><br>
-        <h1><b><b>GENERADOR DE CONTRASEÑAS </b> </b> </h1>
+        <h1><b><b>&nbsp;&nbsp;<font face="Forte" size="12" style="color: #ffffff">Generador De Contraseñas</font>  </b> </b> </h1>
     </div>
     <div class="col-2 bg-dark text-center text-white"><br>
         <a href="{{ url_for('index') }}">
@@ -30,38 +30,39 @@
 <form action="{{ url_for('generadorPost') }}" method="post">
     <div class="row text-center">
         <div class="col-4">
-            Longitud de contraseñas
+            <font face="Cooper Black" size="5" style="color: #000000">Longitud de contraseñas</font>
             <div>
-                <input type="number" min="0" max="100" name="longitud" value="{{ longitudCaracteres }}"/>
+                <input type="number" min="0" max="100" name="longitud" id="longitud" for="vol" value="{{ longitudCaracteres }}"/>
+                <input type="range" id="vol" name="vol" min="0" max="100" value="50" onchange="document.getElementById('longitud').value=value">
             </div>
         </div>
         <div class="col-4">
-            <input type="radio"  name="letra" value="1" onclick="pacman()"> facil de leer <br>
-            <input type="radio"  name="letra" value="2" onclick="pacman()"> Todos los caracteres <br>
+            <input type="radio"  name="letra" value="1" onclick="pacman()">&nbsp;&nbsp;<font face="Cooper Black" size="5" style="color: #000000">facil de leer</font> <br>
+            <input type="radio"  name="letra" value="2" onclick="pacman()">&nbsp;&nbsp;<font face="Cooper Black" size="5" style="color: #000000">Todos los caracteres</font> <br>
         </div>
         <div class="col-4">
             {% if mayusculas == "si" %}
-            <input type="checkbox" name="mayusculas" id="mayusculas" checked> Mayusculas <br>
+            <input type="checkbox" name="mayusculas" id="mayusculas" checked>&nbsp;&nbsp;<font face="Cooper Black" size="5" style="color: #000000">Mayusculas</font>  <br>
             {% else %}
-            <input type="checkbox" name="mayusculas" id="mayusculas"> Mayusculas <br>
+            <input type="checkbox" name="mayusculas" id="mayusculas"> &nbsp;&nbsp;<font face="Cooper Black" size="5" style="color: #000000">Mayusculas</font> <br>
             {% endif %}
 
             {% if minusculas == "si" %}
-            <input type="checkbox" name="minusculas" id="minusculas" checked> Minusculas <br>
+            <input type="checkbox" name="minusculas" id="minusculas" checked>&nbsp;&nbsp;<font face="Cooper Black" size="5" style="color: #000000">Minusculas</font>  <br>
             {% else %}
-            <input type="checkbox" name="minusculas" id="minusculas"> Minusculas <br>
+            <input type="checkbox" name="minusculas" id="minusculas"> &nbsp;&nbsp;<font face="Cooper Black" size="5" style="color: #000000">Minusculas</font> <br>
             {% endif %}
 
             {% if numeros == "si" %}
-            <input type="checkbox" name="numeros" id="numeros" checked> Numeros <br>
+            <input type="checkbox" name="numeros" id="numeros" checked>&nbsp;&nbsp;<font face="Cooper Black" size="5" style="color: #000000">Numeros</font>  <br>
             {% else %}
-            <input type="checkbox" name="numeros" id="numeros"> Numeros <br>
+            <input type="checkbox" name="numeros" id="numeros"> &nbsp;&nbsp;<font face="Cooper Black" size="5" style="color: #000000">Numeros</font> <br>
             {% endif %}
 
             {% if simbolos == "si" %}
-            <input type="checkbox" name="simbolos" id="simbolos" checked> Simbolos <br>
+            <input type="checkbox" name="simbolos" id="simbolos" checked>&nbsp;&nbsp;<font face="Cooper Black" size="5" style="color: #000000">Simbolos</font> <br>
             {% else %}
-            <input type="checkbox" name="simbolos" id="simbolos"> Simbolos <br>
+            <input type="checkbox" name="simbolos" id="simbolos"> &nbsp;&nbsp;<font face="Cooper Black" size="5" style="color: #000000">Simbolos</font>  <br>
             {% endif %}
         </div>
         {% with messages = get_flashed_messages() %}
@@ -83,7 +84,7 @@
     </div>
 </form>
 <div class="col-12 text-center">
-    <b>Nueva Contraseña</b> <br>
+    &nbsp;&nbsp;<font face="Cooper Black" size="5" style="color: #000000">Nueva Contraseña</font>  <br>
     <input type="text" name="" id="" value="{{ recivirContraseña }}" class="copiar form-control form-control-lg">
     <button class="copy btn btn-dark m-2">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
