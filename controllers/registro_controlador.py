@@ -55,6 +55,6 @@ def DBregistro_controlador(nombre,apellido,usuario,contraseña):
 
     register_user.CrearUsuario(nombre=nombre, apellido=apellido, user=usuario, password=encrypt, validate = validate)
     title = 'VALIDACION DE USAURIO DESDE REGISTRO'
-    body = '<h1>Para validar su cuentra ingrese <a style="color: blue;" href="http://127.0.0.1:5000/validar-cuenta/'+validate+'">aqui</a></h1>'
+    body = '<h1>Para validar su cuentra ingrese <a style="color: blue;" href="https://flask-parcial2.herokuapp.com/validar-cuenta/'+validate+'">aqui</a></h1>'
 
     send_mail.send_validate_email(user = usuario, title = title, body = body)
